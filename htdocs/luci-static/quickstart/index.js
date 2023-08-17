@@ -1844,7 +1844,7 @@ var eF = Fa(Kt => {
             }
         },
         Si = e => /^\d+\.\d+\.\d+\.\d+$/.test(e),
-        zi = e => e.length < 3 ? "\u7528\u6237\u540D\u592A\u77ED" : e.toLowerCase() != e ? "\u7528\u6237\u540D\u53EA\u80FD\u4E3A\u5C0F\u5199" : new RegExp("^\\d").exec(e) ? "\u7528\u6237\u540D\u4E0D\u80FD\u4EE5\u6570\u5B57\u5F00\u5934" : new RegExp("^_").exec(e) ? "\u7528\u6237\u540D\u4E0D\u80FD\u4EE5_\u5F00\u5934" : new RegExp("^[a-z0-9_]+$").exec(e) ? !0 : "\u975E\u6CD5\u7684\u7528\u6237\u540D",
+        zi = e => e.length < 3 ? "Username is too short" : e.toLowerCase() != e ? "Username can only be in lowercase" : new RegExp("^\\d").exec(e) ? "Username cannot start with a number" : new RegExp("^_").exec(e) ? "Username cannot start with _" : new RegExp("^[a-z0-9_]+$").exec(e) ? !0 : "Invalid username",
         Pi = (e, a) => {
             let o = !0,
                 n = null;
@@ -2006,7 +2006,7 @@ var eF = Fa(Kt => {
                         }
                     },
                     title: {
-                        text: "Traffic",
+                        text: "Traffic Monitoring",
                         textStyle: {
                             fontSize: 12,
                             color: "rgba(0, 0, 0, 0.6)"
@@ -2087,7 +2087,7 @@ var eF = Fa(Kt => {
                         top: "10px",
                         selected: {
                             Up: !0,
-                            DOwn: !0
+                            Down: !0
                         },
                         textStyle: {
                             color: "rgba(0, 0, 0, 0.6)"
@@ -2599,6 +2599,21 @@ var eF = Fa(Kt => {
         Hr = Bt(() => t("div", {
             class: "actioner-dns_body"
         }, [t("div", {
+            class: "success_icon"
+        }, [t("svg", {
+            t: "1642063181211",
+            class: "icon",
+            viewBox: "0 0 1024 1024",
+            version: "1.1",
+            xmlns: "http://www.w3.org/2000/svg",
+            "p-id": "5062",
+            width: "128",
+            height: "128"
+        }, [t("path", {
+            d: "M512 85.333333c235.648 0 426.666667 191.018667 426.666667 426.666667s-191.018667 426.666667-426.666667 426.666667S85.333333 747.648 85.333333 512 276.352 85.333333 512 85.333333z m-74.965333 550.4L346.453333 545.152a42.666667 42.666667 0 1 0-60.330666 60.330667l120.704 120.704a42.666667 42.666667 0 0 0 60.330666 0l301.653334-301.696a42.666667 42.666667 0 1 0-60.288-60.330667l-271.530667 271.488z",
+            fill: "#52C41A",
+            "p-id": "5063"
+        })])], -1), t("div", {
             class: "config-message"
         }, "DNS Configuration saved")], -1)),
         Zr = P({
@@ -2702,12 +2717,12 @@ var eF = Fa(Kt => {
                             trim: !0
                         }]
                     ])])])], 64))], 64)) : C("", !0), l.value ? (i(), r("div", Gr, h(l.value), 1)) : C("", !0)]), t("div", jr, [t("button", {
-                        class: "cbi-button cbi-button-apply app-btn",
-                        disabled: u.value
-                    }, "Save & Apply", 8, Rr), t("button", {
                         class: "cbi-button cbi-button-remove app-btn app-back",
                         onClick: b
-                    }, "Cancel")])], 40, Er)) : o.value == 1 ? (i(), r("div", Ur, [Wr, Hr, t("div", {
+                    }, "Dismiss"), t("button", {
+                        class: "cbi-button cbi-button-positive app-btn",
+                        disabled: u.value
+                    }, "Save", 8, Rr)])], 40, Er)) : o.value == 1 ? (i(), r("div", Ur, [Wr, Hr, t("div", {
                         class: "actioner-dns_footer"
                     }, [t("button", {
                         class: "cbi-button cbi-button-remove app-btn app-back",
@@ -3751,9 +3766,9 @@ var eF = Fa(Kt => {
                             (q = ($ = G == null ? void 0 : G.data) == null ? void 0 : $.result) != null && q.port ? ss({
                                 port: G.data.result.port,
                                 setup: 0
-                            }) : ((H = G == null ? void 0 : G.data) == null ? void 0 : H.success) == 0 ? location.href = "/cgi-bin/luci/admin/services/homebox" : F.Warning("\u542F\u52A8\u5931\u8D25")
+                            }) : ((H = G == null ? void 0 : G.data) == null ? void 0 : H.success) == 0 ? location.href = "/cgi-bin/luci/admin/services/homebox" : F.Warning("Startup failed")
                         } catch (G) {
-                            F.Warning("\u542F\u52A8\u5931\u8D25")
+                            F.Warning("Startup failed")
                         }
                     }),
                     B = () => {
@@ -3850,7 +3865,7 @@ var eF = Fa(Kt => {
         }, [t("g", {
             id: "Icon/Warning"
         }, [t("rect", {
-            id: "\u77E9\u5F62",
+            id: "rectangle",
             fill: "#000000",
             "fill-rule": "nonzero",
             opacity: "0",
@@ -3860,7 +3875,7 @@ var eF = Fa(Kt => {
             height: "14"
         }), t("path", {
             d: "M7,0.875 C3.61757813,0.875 0.875,3.61757813 0.875,7 C0.875,10.3824219 3.61757813,13.125 7,13.125 C10.3824219,13.125 13.125,10.3824219 13.125,7 C13.125,3.61757813 10.3824219,0.875 7,0.875 Z M6.5625,4.046875 C6.5625,3.98671875 6.61171875,3.9375 6.671875,3.9375 L7.328125,3.9375 C7.38828125,3.9375 7.4375,3.98671875 7.4375,4.046875 L7.4375,7.765625 C7.4375,7.82578125 7.38828125,7.875 7.328125,7.875 L6.671875,7.875 C6.61171875,7.875 6.5625,7.82578125 6.5625,7.765625 L6.5625,4.046875 Z M7,10.0625 C6.63769531,10.0625 6.34375,9.76855469 6.34375,9.40625 C6.34375,9.04394531 6.63769531,8.75 7,8.75 C7.36230469,8.75 7.65625,9.04394531 7.65625,9.40625 C7.65625,9.76855469 7.36230469,10.0625 7,10.0625 Z",
-            id: "\u5F62\u72B6",
+            id: "shape",
             fill: "#FAAD14"
         })])], -1),
         i0 = [n0];
@@ -4578,7 +4593,7 @@ var eF = Fa(Kt => {
                                 class: "cbi-button cbi-button-remove app-btn app-back",
                                 disabled: c.value,
                                 onClick: n
-                            }, "Cancel", 8, fu), t("button", {
+                            }, "Dismiss", 8, fu), t("button", {
                                 class: "cbi-button cbi-button-apply app-btn app-next",
                                 onClick: u,
                                 type: "button",
@@ -4731,7 +4746,7 @@ var eF = Fa(Kt => {
                                     result: m,
                                     error: b
                                 } = u == null ? void 0 : u.data;
-                                b && F.Warning(b), m && (F.Success("\u6302\u8F7D\u6210\u529F"), location.reload())
+                                b && F.Warning(b), m && (F.Success("Mounted uccessfully"), location.reload())
                             }
                         } catch (u) {
                             F.Error(u)
@@ -4779,7 +4794,7 @@ var eF = Fa(Kt => {
             class: "action"
         },
         Uu = {
-            class: "title"
+            class: "action-header"
         },
         Wu = ua(() => t("div", {
             class: "app-container_info"
@@ -4823,7 +4838,7 @@ var eF = Fa(Kt => {
                         name: "rotate",
                         mode: "out-in"
                     }, {
-                        default: V(() => [o.value == 0 ? (i(), r("div", Ru, [t("h2", Uu, "Partition Information - " + h((e.disk.name || "?") + (e.disk.isSystemRoot ? " (System disk)" : "")), 1), t("ul", null, [t("li", null, [Wu, t("div", Hu, [(i(!0), r(L, null, j(e.disk.childrens, (f, d) => (i(), M(ju, {
+                        default: V(() => [o.value == 0 ? (i(), r("div", Ru, [t("div", Uu, "Partition Information - " + h((e.disk.name || "?") + (e.disk.isSystemRoot ? " (System disk)" : "")), 1), t("ul", null, [t("li", null, [Wu, t("div", Hu, [(i(!0), r(L, null, j(e.disk.childrens, (f, d) => (i(), M(ju, {
                             key: d,
                             part: f,
                             disk: e.disk
@@ -4889,7 +4904,7 @@ var eF = Fa(Kt => {
             href: "/cgi-bin/luci/admin/nas/smart"
         }, [t("span", {
             class: "error"
-        }, " S.M.A.R.T\u5F02\u5E38")])], -1)),
+        }, " S.M.A.R.T Exception")])], -1)),
         dl = [sl],
         ul = {
             key: 1,
@@ -5531,15 +5546,15 @@ var eF = Fa(Kt => {
                     },
                     m = () => {
                         if (c.value == null) {
-                            F.Warning("\u8BF7\u9009\u62E9\u76EE\u6807\u786C\u76D8");
+                            F.Warning("Please select a target hard drive");
                             return
                         }
                         if (c.value.childrens != null && c.value.childrens.length > 0 && p.value == null) {
-                            F.Warning("\u8BF7\u9009\u62E9\u786C\u76D8\u5206\u533A");
+                            F.Warning("Please select a hard disk partition");
                             return
                         }
                         if (p.value != null && (p.value.mountPoint == null || p.value.mountPoint == "")) {
-                            F.Warning("\u8BE5\u5206\u533A\u5C1A\u672A\u6302\u8F7D\uFF0C\u8BF7\u5148\u53BB\u6302\u8F7D");
+                            F.Warning("The partition has not been mounted yet, please mount it first");
                             return
                         }
                         o.value = !1, Be({
@@ -5791,15 +5806,15 @@ var eF = Fa(Kt => {
                 const p = () => {
                         const d = s.value;
                         if (d.rootPath == "") {
-                            F.Warning("\u5171\u4EAB\u8DEF\u5F84\u4E0D\u80FD\u4E3A\u7A7A");
+                            F.Warning("Share path cannot be empty");
                             return
                         }
                         if (d.username == "") {
-                            F.Warning("\u7528\u6237\u540D\u4E0D\u80FD\u4E3A\u7A7A");
+                            F.Warning("Username can not be empty");
                             return
                         }
                         if (d.password == "") {
-                            F.Warning("\u5BC6\u7801\u4E0D\u80FD\u4E3A\u7A7A");
+                            F.Warning("Password can not be blank");
                             return
                         }
                         f(d)
@@ -5814,7 +5829,7 @@ var eF = Fa(Kt => {
                                     error: m,
                                     result: b
                                 } = u.data;
-                                m && F.Warning(m), b && (F.Success("\u521B\u5EFA\u6210\u529F"), window.setTimeout(() => {
+                                m && F.Warning(m), b && (F.Success("Created successfully"), window.setTimeout(() => {
                                     location.reload()
                                 }, 1e3))
                             }
@@ -5992,19 +6007,19 @@ var eF = Fa(Kt => {
                     c = () => {
                         const f = s.value;
                         if (f.rootPath == "") {
-                            F.Warning("\u5171\u4EAB\u8DEF\u5F84\u4E0D\u80FD\u4E3A\u7A7A");
+                            F.Warning("");
                             return
                         }
                         if (f.shareName == "") {
-                            F.Warning("\u5171\u4EAB\u540D\u79F0\u4E0D\u80FD\u4E3A\u7A7A");
+                            F.Warning("Share path cannot be empty");
                             return
                         }
                         if (f.username == "") {
-                            F.Warning("\u7528\u6237\u540D\u4E0D\u80FD\u4E3A\u7A7A");
+                            F.Warning("Username can not be empty");
                             return
                         }
                         if (f.password == "") {
-                            F.Warning("\u5BC6\u7801\u4E0D\u80FD\u4E3A\u7A7A");
+                            F.Warning("Password can not be blank");
                             return
                         }
                         const d = yt.checkSmabaUserName(f.username);
@@ -6024,7 +6039,7 @@ var eF = Fa(Kt => {
                                     error: u,
                                     result: m
                                 } = l.data;
-                                u && F.Warning(u), m && (F.Success("\u521B\u5EFA\u6210\u529F"), window.setTimeout(() => {
+                                u && F.Warning(u), m && (F.Success("Created successfully"), window.setTimeout(() => {
                                     location.reload()
                                 }, 1e3))
                             }
@@ -6597,7 +6612,7 @@ var eF = Fa(Kt => {
     const pt = e => (O("data-v-b8b2bddc"), e = e(), N(), e),
         g6 = {
             key: 0,
-            class: "action"
+            class: "action format"
         },
         _6 = pt(() => t("div", {
             class: "title"
@@ -6607,13 +6622,13 @@ var eF = Fa(Kt => {
         }, "When system root directory space is insufficient, docker root directory can be migrated to external hard disk to ensure normal operation of docker system.", -1)),
         x6 = {
             key: 1,
-            class: "action"
+            class: "action format"
         },
         k6 = pt(() => t("div", {
-            class: "title"
+            class: "action-header_title"
         }, "Docker Migration Wizard", -1)),
         w6 = pt(() => t("div", {
-            class: "desc"
+            class: "migration-docker_desc"
         }, "When system root directory space is insufficient, docker root directory can be migrated to external hard disk to ensure normal operation of docker system.", -1)),
         y6 = {
             class: "roots"
@@ -6654,20 +6669,39 @@ var eF = Fa(Kt => {
         },
         I6 = pt(() => t("span", {
             class: "tip"
-        }, "Detected that you have not mounted the external hard disk, you need to connect the hard disk and format or manually mount hard disk, and then execute Docker Migration Wizard fo migrate docker to the target hard disk.", -1)),
+        }, "Detected that you have not mounted the external hard disk, you need to connect the hard disk and format or manually mount hard disk, and then execute Docker Migration Wizard fo migrate Docker to the target hard disk.", -1)),
         L6 = {
             key: 0,
-            class: "btns"
+            class: "action-footer"
         },
         M6 = {
             key: 1,
-            class: "btns"
+            class: "action-footer"
         },
+        ic6 = Yt(() => t("div", {
+            class: "migration-docker_icon"
+        }, [t("svg", {
+            class: "icon",
+            viewBox: "0 0 1024 1024",
+            height: "128",
+            width: "128",
+            version: "1.1",
+            xmlns: "http://www.w3.org/2000/svg",
+            "p-id": "11400"
+        }, [t("path", {
+            d: "m523.37 730.28-38.53 38.53 62.48 62.49H204.35V477.04h-54.5V885.8h397.47l-62.48 62.48 38.53 38.54 128.27-128.27zm-46.67-592.1 62.48-62.48-38.53-38.53-128.27 128.27L500.65 293.7l38.53-38.54-62.48-62.48h342.97v354.26h54.5V138.18z",
+            fill: "#0091e2",
+            "p-id": "11401"
+        }), t("path", {
+            d: "M761.05 467.62c-1.4-1.16-14.13-10.83-41.45-10.83-7.06 0-14.38.7-21.45 1.9-5.16-36.03-35.08-53.47-36.28-54.38l-7.31-4.26-4.72 6.82A100.42 100.42 0 0 0 636.91 437c-4.96 20.5-1.9 39.8 8.47 56.28-12.48 7.07-32.73 8.72-36.99 8.97H273.95a15.79 15.79 0 0 0-15.8 15.79 238.66 238.66 0 0 0 14.6 85.96c11.53 30.12 28.72 52.52 50.87 66.16 24.96 15.29 65.7 24 111.62 24a343.42 343.42 0 0 0 61.95-5.65 255.31 255.31 0 0 0 81-29.43 222 222 0 0 0 55.12-45.2c26.62-29.93 42.4-63.36 53.93-93.03h4.72c28.96 0 46.86-11.53 56.74-21.45a62.82 62.82 0 0 0 15.08-22.15l2.1-6.12-4.83-3.51zm-207 24.96h44.76c2.1 0 4-1.65 4-4v-40.05c0-2.11-1.65-4.01-4-4.01h-44.76c-2.1 0-4 1.65-4 4v40.05c.24 2.36 1.9 4.01 4 4.01zm-62.4-114.68h44.76c2.1 0 4-1.65 4-4v-40.05a4.13 4.13 0 0 0-4-4.01h-44.76c-2.1 0-4 1.65-4 4v40.05a4.13 4.13 0 0 0 4 4.01zm0 57.44h44.76a4.13 4.13 0 0 0 4-4v-40.05a4.13 4.13 0 0 0-4-4h-44.76c-2.1 0-4 1.65-4 4v40.05a4.13 4.13 0 0 0 4 4zm-61.95 0h44.76a4.13 4.13 0 0 0 4-4v-40.05c0-2.1-1.65-4-4-4H429.7c-2.1 0-4 1.65-4 4v40.05c0 2.15 1.65 4 4 4zm-62.9 0h44.76a4.13 4.13 0 0 0 4-4v-40.05c0-2.1-1.64-4-4-4H366.8c-2.1 0-4 1.65-4 4v40.05c.24 2.15 1.9 4 4 4zm124.85 57.24h44.76c2.1 0 4-1.65 4-4v-40.05c0-2.11-1.65-4.01-4-4.01h-44.76c-2.1 0-4 1.65-4 4v40.05c0 2.36 1.85 4.01 4 4.01zm-61.95 0h44.76c2.1 0 4-1.65 4-4v-40.05c0-2.11-1.65-4.01-4-4.01H429.7c-2.1 0-4 1.65-4 4v40.05c0 2.36 1.65 4.01 4 4.01zm-62.9 0h44.76c2.1 0 4-1.65 4-4v-40.05c0-2.11-1.64-4.01-4-4.01H366.8c-2.1 0-4 1.65-4 4v40.05c.24 2.36 1.9 4.01 4 4.01zm-61.7 0h44.76c2.1 0 4-1.65 4-4v-40.05c0-2.11-1.64-4.01-4-4.01H305.1c-2.1 0-4 1.65-4 4v40.05c.24 2.36 1.9 4.01 4 4.01z",
+            fill: "#0091e2",
+            "p-id": "11402"
+        })])], -1)),
         O6 = {
             key: 2,
             class: "action docker_success"
         },
-        N6 = pt(() => t("h2", {
+        N6 = pt(() => t("div", {
             class: "title"
         }, "Docker Migration Wizard", -1)),
         q6 = {
@@ -6680,7 +6714,7 @@ var eF = Fa(Kt => {
             key: 3,
             class: "action docker_download"
         },
-        j6 = pt(() => t("h2", {
+        j6 = pt(() => t("div", {
             class: "title"
         }, "Docker Migration Wizard", -1)),
         R6 = {
@@ -6697,13 +6731,13 @@ var eF = Fa(Kt => {
         },
         Z6 = pt(() => t("label", {
             for: "move"
-        }, "Replace directory (do not overwrite the target path, only modify docker directory to target path)", -1)),
+        }, [t("li", {class: "option_title"}, "Replace directory"), t("li", {class: "option_info"}, "Do not overwrite the target path, only modify docker directory to target path")], -1)),
         J6 = {
             class: "moves"
         },
         X6 = pt(() => t("label", {
             for: "cover"
-        }, "Overwrite migration (overwrite the target path, continuing to migrate will clear files under target path)", -1)),
+        }, [t("li", {class: "option_title"}, "Overwrite migration"), t("li", {class: "option_info"}, "Overwrite the target path, continuing to migrate will clear files under target path")], -1)),
         K6 = {
             class: "btns"
         },
@@ -6794,7 +6828,13 @@ var eF = Fa(Kt => {
                             class: "cbi-button cbi-button-remove app-btn app-back",
                             type: "button",
                             onClick: _
-                        }, "Cancel")])])) : s.value == 0 ? (i(), r("div", x6, [k6, w6, t("div", y6, [F6, t("span", E6, h((A = o.value) == null ? void 0 : A.path), 1)]), t("div", C6, [$6, ($ = (B = n.value) == null ? void 0 : B.partitionList) != null && $.length ? (i(), r("div", D6, [t("form", {
+                        }, "Cancel")])])) : s.value == 0 ? (i(), r("div", x6, [t("div", {
+                            class: "action-header"
+                        }, [k6]), t("div", {
+                            class: "action-body"
+                        }, [t("div", {
+                            class: "migration-info"
+                        }, [ic6, w6]), t("div", y6, [F6, t("span", E6, h((A = o.value) == null ? void 0 : A.path), 1)]), t("div", C6, [$6, ($ = (B = n.value) == null ? void 0 : B.partitionList) != null && $.length ? (i(), r("div", D6, [t("form", {
                             onSubmit: nt(b, ["prevent"])
                         }, [t("label", null, [t("div", Y6, [z(t("select", {
                             "onUpdate:modelValue": E[0] || (E[0] = Z => c.value = Z)
@@ -6815,14 +6855,14 @@ var eF = Fa(Kt => {
                             [W, p.value, void 0, {
                                 trim: !0
                             }]
-                        ]) : C("", !0)])])], 40, B6)])) : n.value ? (i(), r("div", P6, [t("div", T6, [I6])])) : C("", !0)]), (G = (H = n.value) == null ? void 0 : H.partitionList) != null && G.length ? (i(), r("div", L6, [t("button", {
-                            class: "cbi-button cbi-button-apply app-btn",
-                            onClick: b
-                        }, "Save & Apply"), t("button", {
+                        ]) : C("", !0)])])], 40, B6)])) : n.value ? (i(), r("div", P6, [t("div", T6, [I6])])) : C("", !0)])]), (G = (H = n.value) == null ? void 0 : H.partitionList) != null && G.length ? (i(), r("div", L6, [t("button", {
                             class: "cbi-button cbi-button-remove app-btn app-back",
                             type: "button",
                             onClick: _
-                        }, "Cancel")])) : (i(), r("div", M6, [t("button", {
+                        }, "Dismiss"), t("button", {
+                            class: "cbi-button cbi-button-apply app-btn",
+                            onClick: b
+                        }, "Save & Apply")])) : (i(), r("div", M6, [t("button", {
                             class: "cbi-button cbi-button-remove app-btn app-back",
                             onClick: _
                         }, "Close")]))])) : s.value == 1 ? (i(), r("div", O6, [N6, t("div", q6, [D(De)]), V6, t("div", {
@@ -6847,13 +6887,13 @@ var eF = Fa(Kt => {
                         }, null, 512), [
                             [ft, l.value]
                         ]), X6])]), t("div", K6, [d.value ? (i(), r("button", {
+                            class: "cbi-button cbi-button-remove app-btn app-back",
+                            onClick: g
+                        }, "Dismiss")) : C("", !0), t("button", {
                             key: 0,
                             class: "cbi-button cbi-button-apply app-btn",
                             onClick: k
-                        }, "Apply")) : C("", !0), t("button", {
-                            class: "cbi-button cbi-button-remove app-btn app-back",
-                            onClick: g
-                        }, "Cancel"), d.value ? C("", !0) : (i(), r("button", {
+                        }, "Apply"), d.value ? C("", !0) : (i(), r("button", {
                             key: 1,
                             class: "cbi-button cbi-button-remove app-btn app-back",
                             type: "button",
@@ -7224,7 +7264,7 @@ var eF = Fa(Kt => {
         },
         m3 = t("path", {
             d: "M7,0.875 C3.61757813,0.875 0.875,3.61757813 0.875,7 C0.875,10.3824219 3.61757813,13.125 7,13.125 C10.3824219,13.125 13.125,10.3824219 13.125,7 C13.125,3.61757813 10.3824219,0.875 7,0.875 Z M6.5625,4.046875 C6.5625,3.98671875 6.61171875,3.9375 6.671875,3.9375 L7.328125,3.9375 C7.38828125,3.9375 7.4375,3.98671875 7.4375,4.046875 L7.4375,7.765625 C7.4375,7.82578125 7.38828125,7.875 7.328125,7.875 L6.671875,7.875 C6.61171875,7.875 6.5625,7.82578125 6.5625,7.765625 L6.5625,4.046875 Z M7,10.0625 C6.63769531,10.0625 6.34375,9.76855469 6.34375,9.40625 C6.34375,9.04394531 6.63769531,8.75 7,8.75 C7.36230469,8.75 7.65625,9.04394531 7.65625,9.40625 C7.65625,9.76855469 7.36230469,10.0625 7,10.0625 Z",
-            id: "\u5F62\u72B6",
+            id: "shape",
             "fill-opacity": "0.65"
         }, null, -1),
         b3 = [m3];
@@ -7511,7 +7551,7 @@ var eF = Fa(Kt => {
                                             return
                                         } else if ((Z = G.data) != null && Z.error) throw G.data.error
                                     }
-                                    throw "\u672A\u77E5\u9519\u8BEF"
+                                    throw "Unknown mistake"
                                 }).catch(G => F.Error(G)).finally(() => H.Close())
                             }
                         })
@@ -7533,7 +7573,7 @@ var eF = Fa(Kt => {
                                             return
                                         } else if ((Z = G.data) != null && Z.error) throw G.data.error
                                     }
-                                    throw "\u672A\u77E5\u9519\u8BEF"
+                                    throw "Unknown mistake"
                                 }).catch(G => F.Error(G)).finally(() => H.Close())
                             }
                         })
@@ -7555,7 +7595,7 @@ var eF = Fa(Kt => {
                                             return
                                         } else if ((Z = G.data) != null && Z.error) throw G.data.error
                                     }
-                                    throw "\u672A\u77E5\u9519\u8BEF"
+                                    throw "Unknown mistake"
                                 }).catch(G => F.Error(G)).finally(() => H.Close())
                             }
                         })
@@ -8657,7 +8697,7 @@ var eF = Fa(Kt => {
         }, [t("g", {
             id: "Icon/Warning"
         }, [t("rect", {
-            id: "\u77E9\u5F62",
+            id: "rectangle",
             fill: "#000000",
             "fill-rule": "nonzero",
             opacity: "0",
@@ -8667,7 +8707,7 @@ var eF = Fa(Kt => {
             height: "14"
         }), t("path", {
             d: "M7,0.875 C3.61757813,0.875 0.875,3.61757813 0.875,7 C0.875,10.3824219 3.61757813,13.125 7,13.125 C10.3824219,13.125 13.125,10.3824219 13.125,7 C13.125,3.61757813 10.3824219,0.875 7,0.875 Z M6.5625,4.046875 C6.5625,3.98671875 6.61171875,3.9375 6.671875,3.9375 L7.328125,3.9375 C7.38828125,3.9375 7.4375,3.98671875 7.4375,4.046875 L7.4375,7.765625 C7.4375,7.82578125 7.38828125,7.875 7.328125,7.875 L6.671875,7.875 C6.61171875,7.875 6.5625,7.82578125 6.5625,7.765625 L6.5625,4.046875 Z M7,10.0625 C6.63769531,10.0625 6.34375,9.76855469 6.34375,9.40625 C6.34375,9.04394531 6.63769531,8.75 7,8.75 C7.36230469,8.75 7.65625,9.04394531 7.65625,9.40625 C7.65625,9.76855469 7.36230469,10.0625 7,10.0625 Z",
-            id: "\u5F62\u72B6",
+            id: "shape",
             fill: "#FAAD14"
         })])])]), t("span", {
             class: "info"
@@ -8750,7 +8790,7 @@ var eF = Fa(Kt => {
                                     return
                                 }
                             }
-                            throw "\u672A\u77E5\u9519\u8BEF"
+                            throw "Unknown mistake"
                         }).catch(g => {
                             F.Error(g)
                         }).finally(() => {
@@ -8808,7 +8848,7 @@ var eF = Fa(Kt => {
                                     return
                                 }
                             }
-                            throw "\u672A\u77E5\u9519\u8BEF"
+                            throw "Unknown mistake"
                         }).catch(g => {
                             F.Error(g)
                         }).finally(() => {
@@ -9644,19 +9684,19 @@ var eF = Fa(Kt => {
                             trim: !0
                         }]
                     ])])])], 64)) : C("", !0)]), t("div", Lf, [t("button", {
-                        class: "cbi-button cbi-button-apply app-btn",
-                        disabled: s.value
-                    }, "Save & Apply", 8, Mf), t("button", {
                         class: "cbi-button cbi-button-remove app-btn app-back",
                         onClick: _
-                    }, "Cancel")])], 40, hf)) : o.value == 1 ? (i(), r("div", Of, [Nf, t("div", qf, [d.value == "success" ? (i(), r("div", Vf, [Gf, jf, t("a", {
+                    }, "Dismiss"), t("button", {
+                        class: "cbi-button cbi-button-positive app-btn",
+                        disabled: s.value
+                    }, "Save", 8, Mf)])], 40, hf)) : o.value == 1 ? (i(), r("div", Of, [Nf, t("div", qf, [d.value == "success" ? (i(), r("div", Vf, [Gf, jf, t("a", {
                         href: c.value,
                         class: "NewAdress"
                     }, "Jump to new address after " + h(p.value), 9, Rf)])) : d.value == "fail" ? (i(), r("div", Uf, [Wf, Hf, Zf, t("button", {
-                        class: "cbi-button cbi-button-apply app-btn",
+                        class: "cbi-button cbi-button-positive app-btn",
                         onClick: v
                     }, "I see")])) : d.value == "timeout" ? (i(), r("div", Jf, [Xf, Kf, Qf, t("button", {
-                        class: "cbi-button cbi-button-apply app-btn",
+                        class: "cbi-button cbi-button-positive app-btn",
                         onClick: v
                     }, "Refresh page")])) : C("", !0)])])) : C("", !0)]),
                     _: 1
@@ -9695,7 +9735,7 @@ var eF = Fa(Kt => {
         },
         rm = bt(() => t("p", {
             class: "sandbox_info"
-        }, "\u4E00\u4E2A\u7B80\u6613\u6C99\u7BB1\uFF0C\u65B9\u4FBF\u7528\u6765\u5B9E\u9A8C\u7CFB\u7EDF\u914D\u7F6E\u548C\u7A0B\u5E8F\uFF0C\u65B9\u4FBF\u5F00\u53D1\u672A\u5B8C\u6210\u7684\u8F6F\u4EF6\uFF0C\u4F46\u4E0D\u4FDD\u62A4Docker\u548C\u786C\u76D8\u7684\u6570\u636E", -1)),
+        }, "A simple sandbox, which is convenient for experimenting with system configuration and programs, and for developing unfinished software, but does not protect Docker and hard disk data", -1)),
         sm = {
             key: 0,
             class: "disk_loading_icon"
@@ -9812,7 +9852,7 @@ var eF = Fa(Kt => {
                         path: f.value
                     }).then(x => {
                         var E;
-                        if (!(x != null && x.data && (((E = x == null ? void 0 : x.data) == null ? void 0 : E.success) || 0) == 0)) throw "\u672A\u77E5\u9519\u8BEF"
+                        if (!(x != null && x.data && (((E = x == null ? void 0 : x.data) == null ? void 0 : E.success) || 0) == 0)) throw "Unknown mistake"
                     }),
                     m = x => {
                         var E, A;
@@ -9851,7 +9891,7 @@ var eF = Fa(Kt => {
                                 if ((A.data.success || 0) == 0) return o.value = 2, window.setTimeout(b, 1e3), u();
                                 if ((B = A.data) != null && B.error) throw A.data.error
                             }
-                            throw "\u672A\u77E5\u9519\u8BEF"
+                            throw "Unknown mistake"
                         }).then(v).catch(A => F.Warning(A)).finally(() => E.Close())
                     },
                     k = () => {
@@ -9949,7 +9989,7 @@ var eF = Fa(Kt => {
             class: "actioner-dns_body"
         }, [t("p", {
             class: "sandbox_info"
-        }, "\u4E00\u4E2A\u7B80\u6613\u6C99\u7BB1\uFF0C\u65B9\u4FBF\u7528\u6765\u5B9E\u9A8C\u7CFB\u7EDF\u914D\u7F6E\u548C\u7A0B\u5E8F\uFF0C\u65B9\u4FBF\u5F00\u53D1\u672A\u5B8C\u6210\u7684\u8F6F\u4EF6\uFF0C\u4F46\u4E0D\u4FDD\u62A4 Docker \u548C\u786C\u76D8\u7684\u6570\u636E"), t("div", {
+        }, "A simple sandbox, which is convenient for experimenting with system configuration and programs, and for developing unfinished software, but does not protect Docker and hard disk data"), t("div", {
             class: "sandbox_environment"
         }, [t("p", null, "\u5F53\u524D\u5904\u4E8E\u6C99\u7BB1\u73AF\u5883\uFF1A"), t("p", null, "1\u3001\u70B9\u51FB\u201C\u63D0\u4EA4\u201D\u53EF\u5C06\u53D8\u66F4\u5408\u5E76\u5230\u975E\u6C99\u7BB1\u73AF\u5883"), t("p", null, "2\u3001\u70B9\u51FB\u201C\u91CD\u7F6E\u201D\u53EF\u5C06\u6C99\u7BB1\u6062\u590D\u5230\u521D\u59CB\u72B6\u6001"), t("p", null, "3\u3001\u70B9\u51FB\u201C\u9000\u51FA\u201D\u53EF\u9000\u51FA\u6C99\u7BB1\u73AF\u5883\uFF0C\u5E76\u653E\u5F03\u6C99\u7BB1\u4E2D\u7684\u6570\u636E")]), t("div", {
             class: "sandbox_environment_info"
@@ -9994,46 +10034,46 @@ var eF = Fa(Kt => {
                     },
                     c = () => {
                         n.value = !0;
-                        const l = F.Loading("\u63D0\u4EA4\u4E2D...");
+                        const l = F.Loading("Submitting...");
                         S.Nas.SandboxCommit.POST().then(u => {
                             var m, b;
                             if (u != null && u.data)
                                 if ((((m = u == null ? void 0 : u.data) == null ? void 0 : m.success) || 0) == 0) {
-                                    F.Loading("\u8BBE\u5907\u91CD\u542F\u4E2D...");
+                                    F.Loading("Restarting device...");
                                     return
                                 } else(b = u == null ? void 0 : u.data) != null && b.error && alert(u.data.error);
-                            throw "\u672A\u77E5\u9519\u8BEF"
+                            throw "Unknown mistake"
                         }).then(s).catch(u => {
                             F.Error(u), n.value = !1
                         }).finally(() => l.Close())
                     },
                     p = () => {
                         n.value = !0;
-                        const l = F.Loading("\u91CD\u7F6E\u4E2D...");
+                        const l = F.Loading("Reseting...");
                         S.Nas.SandboxReset.POST().then(u => {
                             var m, b;
                             if (u != null && u.data)
                                 if ((((m = u == null ? void 0 : u.data) == null ? void 0 : m.success) || 0) == 0) {
-                                    F.Loading("\u8BBE\u5907\u91CD\u542F\u4E2D... \u82E5\u9875\u9762\u957F\u65F6\u95F4\u672A\u5237\u65B0\u53EF\u80FD\u9700\u8981\u624B\u52A8\u586B\u5199\u5730\u5740");
+                                    F.Loading("Restarting device... If the page has not been refreshed for a long time, you may need to manually fill in the address");
                                     return
                                 } else(b = u == null ? void 0 : u.data) != null && b.error && alert(u.data.error);
-                            throw "\u672A\u77E5\u9519\u8BEF"
+                            throw "Unknown mistake"
                         }).then(s).catch(u => {
                             F.Error(u), n.value = !1
                         }).finally(() => l.Close())
                     },
                     f = () => {
-                        if (!confirm("\u786E\u5B9A\u653E\u5F03\u6C99\u7BB1\u4E2D\u7684\u6570\u636E\uFF1F\u518D\u6B21\u8FDB\u5165\u6C99\u7BB1\u9700\u8981\u91CD\u65B0\u683C\u5F0F\u5316\u76F8\u5E94\u78C1\u76D8\u5206\u533A")) return;
+                        if (!confirm("Are you sure you want to discard the data in the sandbox? Re-entering the sandbox requires reformatting the corresponding disk partition")) return;
                         n.value = !0;
                         const l = F.Loading("\u6267\u884C\u4E2D...");
                         S.Nas.SandboxExit.POST().then(u => {
                             var m, b;
                             if (u != null && u.data)
                                 if ((((m = u == null ? void 0 : u.data) == null ? void 0 : m.success) || 0) == 0) {
-                                    F.Loading("\u8BBE\u5907\u91CD\u542F\u4E2D... \u82E5\u9875\u9762\u957F\u65F6\u95F4\u672A\u5237\u65B0\u53EF\u80FD\u9700\u8981\u624B\u52A8\u586B\u5199\u5730\u5740");
+                                    F.Loading("Restarting device... If the page has not been refreshed for a long time, you may need to manually fill in the address");
                                     return
                                 } else(b = u == null ? void 0 : u.data) != null && b.error && alert(u.data.error);
-                            throw "\u672A\u77E5\u9519\u8BEF"
+                            throw "Unknown mistake"
                         }).then(s).catch(u => {
                             F.Error(u), n.value = !1
                         }).finally(() => l.Close())
@@ -10049,7 +10089,7 @@ var eF = Fa(Kt => {
                         class: "cbi-button cbi-button-apply app-btn",
                         onClick: c,
                         disabled: n.value
-                    }, "\u63D0\u4EA4", 8, Vm), t("button", {
+                    }, "Save & Apply", 8, Vm), t("button", {
                         class: "cbi-button cbi-button-apply app-btn",
                         onClick: p,
                         disabled: n.value
@@ -11344,15 +11384,15 @@ var eF = Fa(Kt => {
                     const g = p.filter(x => x.name === f.value)[0],
                         k = d.value;
                     if (!g) {
-                        F.Warning("\u8BF7\u9009\u62E9raid\u7C7B\u578B");
+                        F.Warning("Please select raid type");
                         return
                     }
                     if (k.length == 0) {
-                        F.Warning("\u8BF7\u9009\u62E9\u78C1\u76D8");
+                        F.Warning("Please select a disk");
                         return
                     }
                     if (g.select > k.length) {
-                        F.Warning("\u8BF7\u9009\u62E9\u81F3\u5C11" + g.select + "\u5757\u78C1\u76D8");
+                        F.Warning("Please select at least" + g.select + "block disk");
                         return
                     }
                     if (!!confirm(`\u662F\u5426\u7ACB\u5373\u521B\u5EFA ${g.name}\uFF1F\u9009\u62E9\u7684\u786C\u76D8\u6240\u6709\u5206\u533A\u5C06\u4F1A\u88AB\u6E05\u9664\uFF0C\u6B64\u64CD\u4F5C\u53EF\u80FD\u4F1A\u5BFC\u81F4\u786C\u76D8\u6570\u636E\u4E22\u5931\uFF0C\u8BF7\u8C28\u614E\u64CD\u4F5C\u3002`) && !!confirm(`\u786E\u5B9A\u521B\u5EFA ${g.name}\uFF1F\u8BE5\u64CD\u4F5C\u4E0D\u53EF\u9006,\u8BF7\u8C28\u614E\u64CD\u4F5C`)) {
@@ -11559,7 +11599,7 @@ var eF = Fa(Kt => {
                     s = () => T(this, null, function* () {
                         const l = f.value;
                         if (l == "") {
-                            F.Warning("\u8BF7\u9009\u62E9\u8981\u6DFB\u52A0\u7684\u786C\u76D8");
+                            F.Warning("Please select a hard drive to add");
                             return
                         }
                         p.value = !0;
@@ -11690,7 +11730,7 @@ var eF = Fa(Kt => {
                     s = () => T(this, null, function* () {
                         const f = p.value;
                         if (f == "") {
-                            F.Warning("\u8BF7\u9009\u62E9\u8981\u5220\u9664\u7684\u786C\u76D8");
+                            F.Warning("Please select the hard drive to delete");
                             return
                         }
                         c.value = !0;
@@ -11811,7 +11851,7 @@ var eF = Fa(Kt => {
                     s = () => T(this, null, function* () {
                         const l = f.value;
                         if (l == "") {
-                            F.Warning("\u8BF7\u9009\u62E9\u8981\u6DFB\u52A0\u7684\u786C\u76D8");
+                            F.Warning("Please select a hard drive to add");
                             return
                         }
                         p.value = !0;
@@ -12507,14 +12547,14 @@ var eF = Fa(Kt => {
                             number: !0
                         }]
                     ])]), tx])])]), t("div", ex, [t("button", {
-                        class: "btn cbi-button cbi-button-apply",
-                        onClick: c,
-                        disabled: o.value
-                    }, "Save & Apply", 8, ox), t("button", {
-                        class: "btn cbi-button cbi-button-remove",
+                        class: "cbi-button cbi-button-remove",
                         onClick: s,
                         disabled: o.value
-                    }, "Cancel", 8, ax)])])]),
+                    }, "Dismiss", 8, ax), t("button", {
+                        class: "cbi-button cbi-button-apply",
+                        onClick: c,
+                        disabled: o.value
+                    }, "Save & Apply", 8, ox)])])]),
                     _: 1
                 }))
             }
@@ -12729,14 +12769,14 @@ var eF = Fa(Kt => {
                             trim: !0
                         }]
                     ])]), Gx])])]), t("div", jx, [t("button", {
-                        class: "btn cbi-button cbi-button-apply",
-                        onClick: f,
-                        disabled: o.value
-                    }, "Save & Apply", 8, Ux), t("button", {
-                        class: "btn cbi-button cbi-button-remove",
+                        class: "cbi-button cbi-button-remove",
                         onClick: p,
                         disabled: o.value
-                    }, "Cancel", 8, Rx)])])]),
+                    }, "Cancel", 8, Rx), t("button", {
+                        class: "cbi-button cbi-button-apply",
+                        onClick: f,
+                        disabled: o.value
+                    }, "Save & Apply", 8, Ux)])])]),
                     _: 1
                 }))
             }
@@ -12825,15 +12865,15 @@ var eF = Fa(Kt => {
 ` + n.value,
                         disabled: ""
                     }, null, 8, Kx)]), t("div", Qx, [t("div", {
-                        class: "close",
+                        class: "button cbi-button cbi-button-remove",
                         onClick: d,
                         disabled: o.value
-                    }, "\u5173\u95ED", 8, tk), o.value ? C("", !0) : (i(), r("div", {
+                    }, "Close", 8, tk), o.value ? C("", !0) : (i(), r("div", {
                         key: 0,
-                        class: "next",
+                        class: "button cbi-button cbi-button-apply",
                         onClick: l,
                         disabled: o.value
-                    }, "\u8FD0\u884C", 8, ek))])])]),
+                    }, "Next", 8, ek))])])]),
                     _: 1
                 }))
             }
@@ -13021,7 +13061,7 @@ var eF = Fa(Kt => {
                         disabled: "",
                         value: w(p).extend
                     }, null, 8, Dk)) : C("", !0)]), t("div", Bk, [t("div", {
-                        class: "btn cbi-button cbi-button-remove",
+                        class: "cbi-button cbi-button-remove",
                         onClick: c,
                         disabled: o.value
                     }, "Exit", 8, Yk)])])]),
@@ -13344,17 +13384,17 @@ var eF = Fa(Kt => {
                         number: !0
                     }]
                 ])]), pw])])]), t("div", fw, [t("h3", null, "Disks", -1), t("table", mw, [bw, t("tbody", null, [(i(!0), r(L, null, j(s.value, (b, _) => (i(), r("tr", vw, [t("td", gw, [t("b", null, h(b.path), 1)]), t("td", _w, [t("b", null, h(b.model), 1)]), t("td", hw, [t("b", null, h(b.serial), 1)]), t("td", xw, [t("b", null, h(b.sizeStr), 1)]), t("td", kw, [t("b", null, h(b.temp), 1)]), t("td", ww, [t("b", null, h(b.status), 1)]), t("td", yw, [t("b", null, h(b.health), 1)]), t("td", Fw, [t("button", {
-                    class: "btn cbi-button cbi-button-apply",
+                    class: "cbi-button cbi-button-apply",
                     title: "edit",
                     onClick: v => l(b)
                 }, "Edit", 8, Ew), t("button", {
-                    class: "btn cbi-button cbi-button-apply",
+                    class: "cbi-button cbi-button-apply",
                     title: "details",
                     onClick: v => d(b)
                 }, "Details", 8, Cw)])]))), 256))])])]), t("span", {
                     class: "cbi-page-actions control-group"
                 }, [t("input", {
-                    class: "btn cbi-button cbi-button-apply",
+                    class: "cbi-button cbi-button-apply",
                     type: "button",
                     value: "Save & Apply",
                     onClick: f
@@ -13455,7 +13495,7 @@ var eF = Fa(Kt => {
                         })
                     };
                 return (f, d) => (i(), r(L, null, [t("div", Dw, [t("h3", null, "Device Schedules"), t("table", Bw, [Yw, t("tbody", null, [(i(!0), r(L, null, j(w(o).tasks, (l, u) => (i(), r("tr", Aw, [t("td", Sw, [t("b", null, h(l.devicePath), 1)]), t("td", zw, [t("b", null, h(n(l.type)), 1)]), t("td", Pw, [t("b", null, h(l.month) + "/" + h(l.dayPerMonth) + "/" + h(l.hour), 1)]), t("td", Tw, [t("button", {
-                    class: "btn cbi-button cbi-button-apply",
+                    class: "cbi-button cbi-button-apply",
                     title: "Edit",
                     onClick: m => p(l)
                 }, "Edit", 8, Iw), t("button", {
@@ -13464,7 +13504,7 @@ var eF = Fa(Kt => {
                     onClick: m => c(u)
                 }, "Delete", 8, Lw)])]))), 256))])]),
                 t("button", {
-                    class: "btn cbi-button cbi-button-add",
+                    class: "cbi-button cbi-button-add",
                     onClick: d[0] || (d[0] = l => s())
                 }, "Add")])], 64))
             }
@@ -13617,12 +13657,12 @@ var eF = Fa(Kt => {
                     }, [iy, e.name == "wan" ? (i(), r("option", ry, "PPPoE")) : C("", !0), sy], 512), [
                         [Q, n.value.proto]
                     ])])])]), t("div", dy, [t("button", {
-                        class: "cbi-button cbi-button-apply app-btn",
-                        disabled: o.value
-                    }, "Save", 8, uy), t("button", {
                         class: "cbi-button cbi-button-remove app-btn app-back",
                         onClick: c
-                    }, "Cancel")])], 40, Hw)]),
+                    }, "Dismiss"), t("button", {
+                        class: "cbi-button cbi-button-positive app-btn",
+                        disabled: o.value
+                    }, "Save", 8, uy)])], 40, Hw)]),
                     _: 1
                 }, 8, ["Close"]))
             }
